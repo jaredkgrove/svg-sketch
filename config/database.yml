@@ -11,6 +11,12 @@ development:
   <<: *default
   database: svg_sketch_development
   host: localhost
+
+production:
+  adapter: postgresql
+  database: my_database_production
+  pool: 5
+  timeout: 5000
 # # SQLite. Versions 3.8.0 and up are supported.
 # #   gem install sqlite3
 # #

@@ -2,7 +2,7 @@
 export const deleteSketch = (id) => {
 
     return (dispatch) => {
-        fetch(`http://localhost:3001/api/v1/sketches/${id}`,{
+        fetch(`/api/v1/sketches/${id}`,{
             method: 'DELETE',
         })
         .then((resp) => {

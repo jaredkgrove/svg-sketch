@@ -3,7 +3,7 @@ export const updateSketch = (id, data) => {
     return (dispatch) => {
         dispatch({ type: 'SAVING_SKETCH' });
 
-        fetch(`http://localhost:3001/api/v1/sketches/${id}`,{
+        fetch(`/api/v1/sketches/${id}`,{
             headers:{
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

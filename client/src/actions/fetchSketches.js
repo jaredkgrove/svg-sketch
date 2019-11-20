@@ -1,6 +1,6 @@
 export function fetchSketches(){
     return (dispatch) => {
-        fetch(`http://localhost:3000/api/v1/sketches`)
+        fetch(`/api/v1/sketches`)
         .then((resp) => {
             if(!resp.ok){throw Error(resp.statusText);}
             return resp.json()

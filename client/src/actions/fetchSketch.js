@@ -1,7 +1,7 @@
 export function fetchSketch(id){
     return (dispatch) => {
         dispatch({ type: 'LOADING_SKETCH' });
-        fetch(`http://localhost:3000/api/v1/sketches/${id}`)
+        fetch(`/api/v1/sketches/${id}`)
         .then((resp) => {
             if(!resp.ok){throw Error(resp.statusText);}
             return resp.json()
