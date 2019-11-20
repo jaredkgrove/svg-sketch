@@ -2,7 +2,7 @@ import React from 'react';
 import circleImage from '../images/Circle.PNG'
 import lineImage from '../images/Line.PNG'
 import rectangleImage from '../images/Rectangle.PNG'
-import polylineImage from '../images/polyLineImage.PNG'
+import polylineImage from '../images/Polyline.PNG'
  const LineTypeSelector = (props) => {
 
     const handleClick = (e) => {
