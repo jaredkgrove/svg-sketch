@@ -7,6 +7,10 @@
     "lib": "lib",
     "test": "test"
   },
+  "engines": {
+    "node": "10.16.3",
+    "yarn": "1.19.1"
+  },
   "dependencies": {
     "object-assign": "^4.1.1",
     "loose-envify": "^1.4.0",
@@ -14,9 +18,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build": "cd client && yarn install && yarn build && cd ..",
+    "build": "yarn --cwd client install && yarn --cwd client build",
     "deploy": "cp -a client/build/. public/",
-    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
+    "heroku-postbuild": "yarn build && yarn deploy"
   },
   "repository": {
     "type": "git",
