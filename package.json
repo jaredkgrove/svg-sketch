@@ -1,36 +1,14 @@
 {
   "name": "svg-sketch",
-  "version": "1.0.0",
-  "description": "## Usage To use this app, just clone, run rails db:migrate and then run rails start. Create and save svg sketches. Sketching options include shapes, lines, colors, and more!",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  },
+  "license": "MIT",
   "engines": {
     "node": "10.16.3",
     "yarn": "1.19.1"
   },
-  "dependencies": {
-    "object-assign": "^4.1.1",
-    "loose-envify": "^1.4.0",
-    "js-tokens": "^4.0.0"
-  },
-  "devDependencies": {},
   "scripts": {
     "build": "yarn --cwd client install && yarn --cwd client build",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "yarn build && yarn deploy"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jaredkgrove/svg-sketch.git"
-  },
+  }
 
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jaredkgrove/svg-sketch/issues"
-  },
-  "homepage": "https://github.com/jaredkgrove/svg-sketch#readme"
 }
