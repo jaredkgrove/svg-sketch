@@ -1,5 +1,5 @@
 import React from 'react';
-import circleImage from '../../public/images/Circle.png'
+import circleImage from '../images/Circle.PNG'
  const LineTypeSelector = (props) => {
 
     const handleClick = (e) => {
@@ -12,7 +12,7 @@ import circleImage from '../../public/images/Circle.png'
     return (
         <>
             
-            <button className={isCurrentSetting('Circle') ? 'selected' : null} onClick={handleClick} value='Circle' style={{paddingTop:'21%', margin:'1%', background: {circleImage}, backgroundSize: 'cover'}}> </button>
+            <button className={isCurrentSetting('Circle') ? 'selected' : null} onClick={handleClick} value='Circle' style={{paddingTop:'21%', margin:'1%', background: `url(${circleImage})`, backgroundSize: 'cover'}}> </button>
             <button className={isCurrentSetting('Line') ? 'selected' : null} onClick={handleClick} value='Line' style={{paddingTop:'21%', margin:'1%', background: "url(/images/Line.png)",  backgroundSize: 'cover'}}>  </button>
             <button className={isCurrentSetting('Rectangle') ? 'selected' : null} onClick={handleClick} value='Rectangle' style={{paddingTop:'21%', margin:'1%', background: "url(/images/Rectangle.png)", backgroundSize: 'cover'}}> </button>
             <button className={isCurrentSetting('Polyline') ? 'selected' : null} onClick={handleClick} value='Polyline' style={{paddingTop:'21%', margin:'1%', background: "url(/images/Free.png)", backgroundSize: 'cover'}}>  </button>
