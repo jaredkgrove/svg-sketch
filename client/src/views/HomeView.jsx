@@ -7,11 +7,12 @@ import SketchesList from '../components/SketchesList'
 import NewSketchInput from '../components/NewSketchInput';
 
 import '../styles/home.css'
+import WelcomeSVG from '../containers/WelcomeSVG';
 
 class HomeView extends React.Component {
 
     componentDidMount(){
-        this.props.clearCurrentSketch()
+        // this.props.clearCurrentSketch()
         if(!this.props.sketches.length){
             this.props.fetchSketches()
         }
@@ -28,6 +29,7 @@ class HomeView extends React.Component {
             <div className='home'>
             
                 <NewSketchInput />
+                <WelcomeSVG elements={this.props.currentSketch.elements}/>
                 <div className='recently-created'>
                     <h1>Recently Created</h1>
                     <SketchesList sketches={this.props.sketches} />

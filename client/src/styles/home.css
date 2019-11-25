@@ -3,12 +3,14 @@
 }
 
 .recently-created{
-    display: inline-block;
+    float: left;
+    text-align: left;
     margin: 10px;
 }
 
 .recently-updated{
-    display: inline-block;
+    float: left;
+    text-align: left;
     margin: 10px;
 }
 
@@ -39,4 +41,11 @@
     width: 20vw;
     margin: 0 1vh 0 0;
     border: none;
+}
+
+.home .sketch-board.welcome{
+  box-sizing: border-box ;
+  border-radius: 10px;
+  margin: 10px;
+  background: hsl(207, 5%, 90%);
 }

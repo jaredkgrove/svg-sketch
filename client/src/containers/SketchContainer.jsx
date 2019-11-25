@@ -18,6 +18,15 @@ class SketchContainer extends React.Component {
         this.setState({
             elements: this.props.currentSketch.elements
         })
+        this.sketchArea.current.addEventListener('touchstart', this.handleOnMouseDown);
+        this.sketchArea.current.addEventListener('touchmove', this.handleOnMouseMove);
+        this.sketchArea.current.addEventListener('touchend', this.handleOnMouseUp);
+    }
+
+    componentWillUnmount() {
+        this.sketchArea.current.removeEventListener('touchstart', this.handleOnMouseDown);
+        this.sketchArea.current.removeEventListener('touchmove', this.handleOnMouseMove);
+        this.sketchArea.current.removeEventListener('touchend', this.handleOnMouseUp);
     }
 
     componentDidUpdate(prevProps){
@@ -29,9 +38,12 @@ class SketchContainer extends React.Component {
     }
 
     handleOnMouseDown = (e) => {
+        let clientX = e.clientX || e.touches[0].clientX
+        let clientY = e.clientY || e.touches[0].clientY
+  
         this.sketchClientRect = this.sketchArea.current.getBoundingClientRect() 
-        let x1 = e.clientX - this.sketchClientRect.left
-        let y1 = e.clientY - this.sketchClientRect.top
+        let x1 = clientX - this.sketchClientRect.left
+        let y1 = clientY - this.sketchClientRect.top
         this.setState({
             isDrawing: true
         })
@@ -39,9 +51,12 @@ class SketchContainer extends React.Component {
     } 
 
     handleOnMouseMove = (e) => {
+        e.preventDefault()
         if(this.state.isDrawing){
-            let x2 = e.clientX - this.sketchClientRect.left
-            let y2 = e.clientY - this.sketchClientRect.top
+            let clientX = e.clientX || e.touches[0].clientX
+            let clientY = e.clientY || e.touches[0].clientY
+            let x2 = clientX - this.sketchClientRect.left
+            let y2 = clientY - this.sketchClientRect.top
             let ratio = 1000 / this.sketchClientRect.width
             let ratioX = 1000 / this.sketchClientRect.width
             let ratioY = 500 / this.sketchClientRect.height
@@ -114,12 +129,14 @@ class SketchContainer extends React.Component {
 
     getHSL = ({h, s, l}) => `hsl(${h},${s}%,${l}%)`
 
+
+
     render(){
         const elementsToRender = () => [...this.state.elements, ...this.state.tempElements]
         return(
             <>
                 <div className='edit-sketch'>
-                    <svg ref={this.sketchArea} viewBox = {`0 0 1000 500`} className={"sketch-board"} onMouseDown={this.handleOnMouseDown} onMouseUp={this.handleOnMouseUp} onMouseMove={this.handleOnMouseMove}>
+                    <svg ref={this.sketchArea} viewBox = {`0 0 1000 500`} className={"sketch-board"} onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseMove} onMouseUp={this.handleOnMouseUp}>
                         <ElementsContainer elements={elementsToRender()} />
                     </svg>
                     <button onClick={this.handleSubmit}>SAVE</button>
