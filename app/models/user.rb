@@ -1,4 +1,4 @@
-class User < ApplicationRecord
-    has_secure_password
-    has_many :sketches
+class User < ApplicationRecord #TODO Implement
+    # has_secure_password
+    # has_many :sketches
 end

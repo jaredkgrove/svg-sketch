@@ -1,2 +1,2 @@
-class Polygon < Element
+class Polygon < Element#TODO Implement
 end

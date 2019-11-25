@@ -1,2 +1,2 @@
-class Ellipse < Element
+class Ellipse < Element#TODO Implement
 end

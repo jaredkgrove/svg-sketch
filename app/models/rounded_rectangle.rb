@@ -1,2 +1,2 @@
-class RoundedRectangle < Element
+class RoundedRectangle < Element#TODO Implement
 end
