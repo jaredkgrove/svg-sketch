@@ -5,13 +5,13 @@
 .recently-created{
     float: left;
     text-align: left;
-    margin: 10px;
+    margin: 0 0 0 10vw;
 }
 
 .recently-updated{
-    float: left;
+    float: right;
     text-align: left;
-    margin: 10px;
+    margin: 0 10vw 0 0;
 }
 
 .home form{
@@ -44,8 +44,9 @@
 }
 
 .home .sketch-board.welcome{
-  box-sizing: border-box ;
   border-radius: 10px;
   margin: 10px;
-  /* background: hsl(207, 5%, 90%); */
+  width: 80vw;
+  display: block;
+  margin: auto;
 }

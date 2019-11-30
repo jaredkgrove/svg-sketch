@@ -21,6 +21,8 @@ class SketchContainer extends React.Component {
         this.sketchArea.current.addEventListener('touchstart', this.handleOnMouseDown);
         this.sketchArea.current.addEventListener('touchmove', this.handleOnMouseMove);
         this.sketchArea.current.addEventListener('touchend', this.handleOnMouseUp);
+        window.addEventListener('keypress',this.handleOnKeyPress)
+        // onKeyPress={this.handleOnKeyPress}
     }
 
     componentWillUnmount() {
@@ -129,6 +131,18 @@ class SketchContainer extends React.Component {
 
     getHSL = ({h, s, l}) => `hsl(${h},${s}%,${l}%)`
 
+    handleOnKeyPress = (e) => {
+
+        if(e.keyCode === 100){
+            this.setState({
+                elements: this.state.elements.slice(0,-1),
+                isDrawing: false,
+        
+            })
+            this.startPoint=[]
+        }
+
+    }
 
 
     render(){
@@ -136,7 +150,7 @@ class SketchContainer extends React.Component {
         return(
             <>
                 <div className='edit-sketch'>
-                    <svg ref={this.sketchArea} viewBox = {`0 0 1000 500`} className={"sketch-board"} onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseMove} onMouseUp={this.handleOnMouseUp}>
+                    <svg ref={this.sketchArea} viewBox = {`0 0 1000 500`} className={"sketch-board"}  onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseMove} onMouseUp={this.handleOnMouseUp}>
                         <ElementsContainer elements={elementsToRender()} />
                     </svg>
                     <button onClick={this.handleSubmit}>SAVE</button>

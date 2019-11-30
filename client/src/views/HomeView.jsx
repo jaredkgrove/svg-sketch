@@ -12,7 +12,7 @@ import WelcomeSVG from '../containers/WelcomeSVG';
 class HomeView extends React.Component {
 
     componentDidMount(){
-        // this.props.clearCurrentSketch()
+        this.props.clearCurrentSketch()
         if(!this.props.sketches.length){
             this.props.fetchSketches()
         }
