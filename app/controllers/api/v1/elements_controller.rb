@@ -2,21 +2,11 @@ class Api::V1::ElementsController < ApplicationController
     before_action :set_sketch
     before_action :set_element, only: [:show]#, :update, :destroy]
 
-    # GET /users
     def index
-    #   @elements = Element.all
       elements_json = ElementSerializer.new(Sketch.elements).serialized_json
       render json: elements_json
     end
   
-    # # GET /users/1
-    def show
-        element_json = ElementSerializer.new(@element).serialized_json
-      render json: element_json
-      # render json: @user
-    end
-  
-    # POST /users
     def create
       @element = Element.new(element_params)
   
@@ -27,22 +17,12 @@ class Api::V1::ElementsController < ApplicationController
       end
     end
   
-    # PATCH/PUT /users/1
-    # def update
-    #   if @user.update(user_params)
-    #     render json: @user
-    #   else
-    #     render json: @user.errors, status: :unprocessable_entity
-    #   end
-    # end
-  
     # # DELETE /users/1
     # def destroy
     #   @user.destroy
     # end
   
     private
-      # Use callbacks to share common setup or constraints between actions.
       def set_sketch
         @sketch = Sketch.find(params[:sketch_id])
       end
@@ -51,7 +31,6 @@ class Api::V1::ElementsController < ApplicationController
         @element = Element.find(params[:id])
       end
   
-      # Only allow a trusted parameter "white list" through.
       def element_params
         params.require(:element).permit()
       end
