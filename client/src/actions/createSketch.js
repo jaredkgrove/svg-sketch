@@ -2,7 +2,7 @@ export const createSketch = (data) => {
 
     return (dispatch) => {
         dispatch({ type: 'SAVING_SKETCH' });
-        fetch(`/api/v1/sketches`,{
+        return fetch(`/api/v1/sketches`,{
             headers:{
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -25,7 +25,7 @@ export const createSketch = (data) => {
                 }
             })
         })
-        .catch(error => console.log(error))
+        .catch(error => error)
     
     }
 }

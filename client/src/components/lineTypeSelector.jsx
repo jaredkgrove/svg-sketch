@@ -6,7 +6,6 @@ import polylineImage from '../images/Polyline.PNG'
  const LineTypeSelector = (props) => {
 
     const handleClick = (e) => {
-        console.log(e.target.value)
         props.handleUpdate(e.target.value)
     }
 

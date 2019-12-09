@@ -34,7 +34,6 @@ import { connect } from 'react-redux';
       }
     
      componentDidUpdate(prevProps, prevState){
-         console.log(prevState)
          if(this.state.sliderPosition && this.state.sliderPosition !== prevState.sliderPosition && (this.state.hue !== prevState.hue)){
             this.props.handleChange({h: this.state.hue})
          }

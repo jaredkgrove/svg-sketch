@@ -22,7 +22,6 @@ const WelcomeSVG = () => {
         }, []);
     return(
         <svg viewBox = {`0 0 1000 180`} className={"sketch-board welcome"} >
-            {console.log(visibleElements)}
             <ElementsContainer elements={visibleElements}/>
         </svg>
     )
