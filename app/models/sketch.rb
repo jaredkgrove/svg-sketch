@@ -1,7 +1,7 @@
 class Sketch < ApplicationRecord
     has_many :elements
     accepts_nested_attributes_for :elements
-    validates_presence_of :name
+    validates :name, presence: true
     validates :name, uniqueness: true
     
     def update_sketch_elements_from_json(data)
