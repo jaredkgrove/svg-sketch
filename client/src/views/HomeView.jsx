@@ -1,8 +1,9 @@
 import React from 'react';
+import styled from 'styled-components'
+import { connect } from 'react-redux';
+
 import {fetchSketches} from '../actions/fetchSketches'
 import {clearCurrentSketch} from '../actions/clearCurrentSketch'
-
-import { connect } from 'react-redux';
 import SketchesList from '../components/SketchesList'
 import NewSketchInput from '../components/NewSketchInput';
 
@@ -26,8 +27,7 @@ class HomeView extends React.Component {
 
     render(){
         return(
-            <div className='home'>
-            
+            <HomeWrapper>
                 <NewSketchInput />
                 <WelcomeSVG elements={this.props.currentSketch.elements}/>
                 <div className='recently-created'>
@@ -38,7 +38,7 @@ class HomeView extends React.Component {
                     <h1>Recently Updated</h1>
                     <SketchesList sketches={[...this.props.sketches].sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated))}/>
                 </div>
-            </div>
+            </HomeWrapper>
         )
     }
 }
@@ -50,5 +50,33 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, { fetchSketches, clearCurrentSketch })(HomeView)
+export default connect(mapStateToProps, {fetchSketches, clearCurrentSketch })(HomeView)
 
+const HomeWrapper = styled.div`
+    text-align: center;
+`;
+
+// .home{
+//     text-align: center;
+// }
+
+// .recently-created{
+//     float: left;
+//     text-align: left;
+//     margin: 0 0 0 10vw;
+// }
+
+// .recently-updated{
+//     float: right;
+//     text-align: left;
+//     margin: 0 10vw 0 0;
+// }
+
+
+// .home .sketch-board.welcome{
+//   border-radius: 10px;
+//   margin: 10px;
+//   width: 80vw;
+//   display: block;
+//   margin: auto;
+// }

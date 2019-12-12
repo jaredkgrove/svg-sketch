@@ -60,22 +60,23 @@ import { connect } from 'react-redux';
 
     setSliderPosition = (e) => {
         this.hueBarClientRect = this.hueBar.current.getBoundingClientRect() 
-        let y = e.clientY - this.hueBarClientRect.top
-        if(y < 0){y=0}
+        let x = e.clientX - this.hueBarClientRect.left
+        if(x < 0){x=0}
+        console.log(x)
         this.setState({
-            sliderPosition: y,
-            hue: this.getHue(y)
+            sliderPosition: x,
+            hue: this.getHue(x)
         })
     }
 
-    getHue = (pos) => (360 * (pos / this.hueBarClientRect.height))
+    getHue = (pos) => (360 * (pos / this.hueBarClientRect.width))
 
-    getSliderPosition = (hue) => ((this.hueBarClientRect.height * hue)/360)
+    getSliderPosition = (hue) => ((this.hueBarClientRect.width * hue)/360)
 
     render(){
         return (
-            <div ref={this.hueBar} onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseMove} onMouseUp={this.handleOnMouseUp}  className='hue-bar' style={{background: 'linear-gradient(to bottom,hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%),hsl(360,100%,50%))'}}>
-                <div style={{backgroundColor: `hsl(${this.state.hue},100%,50%)`, width: '140%', paddingTop:'70%', borderRadius:'35%', border:'1px solid white', position:'relative', top:`${this.state.sliderPosition-15}px`, display:'inline-block', right:'calc(20% + 1px)'}}></div>
+            <div ref={this.hueBar} onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseMove} onMouseUp={this.handleOnMouseUp}  className='hue-bar' style={{background: 'linear-gradient(to right,hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%),hsl(360,100%,50%))'}}>
+                <div style={{backgroundColor: `hsl(${this.state.hue},100%,50%)`, width: '15px', height: '15px', top: '-25%', borderRadius:'100%', border:'1px solid white', position: 'absolute', left:`calc(${this.state.sliderPosition}px - 7.5px)`, display:'inline-block'}}></div>
             </div>
         )
     }

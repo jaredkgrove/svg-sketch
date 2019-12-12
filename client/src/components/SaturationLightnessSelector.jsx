@@ -112,7 +112,7 @@ class SaturationLightnessSelector extends React.Component {
     render(){
         return (
             <div className='sat-light-select'>
-                <canvas   ref={this.canvas} onMouseDown={this.handleOnMouseDown} style={{verticalAlign:'top'}}></canvas>
+                <canvas   ref={this.canvas} onMouseDown={this.handleOnMouseDown}></canvas>
                 <div style={{backgroundColor: `hsl(${this.props.initColor.h},${this.state.saturation}%,${this.state.lightness}%)`, width: '10px', height: '10px', border:'2px solid white', borderRadius: '7px', position:'relative', top:`${this.state.selectorPosition.y-5}px`, left:`${this.state.selectorPosition.x-5}px`}}></div>
             </div>
         )

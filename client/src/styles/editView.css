@@ -13,6 +13,7 @@
   width: 14%;
   background:  hsl(207, 25%, 20%);
   clear: none;
+  overflow: auto;
 }
 
 .edit-view .sketch-board{
@@ -54,13 +55,13 @@
   .sat-light-select{
       float: right;
       clear: both;
-      height: 40%;
+      height: 50%;
   }
   
   .line-width{
     float: left;
     clear: both;
-    height: 40%;
+    /* height: 40%; */
     width: 100%;
   }
 
@@ -75,7 +76,7 @@
   .line-type{
     float: left;
     clear: both;
-    height: 40%;
+    /* height: 40%; */
     width: 100%;
   }
   
@@ -92,14 +93,15 @@
   .color-selectors {
     float: left;
     clear: both;
-    height: 45vh;
+    /* height: 45vh; */
+    /* overflow: auto; */
     width: 100%;
   }
 
   .stroke-selectors{
     float: left;
     clear: both;
-    height: 25vh;
+    /* height: 25vh; */
     width: 100%;
   }
   
@@ -107,8 +109,9 @@
     box-sizing: border-box;
     float: left;
     clear: both;
+    text-align: center;
     margin: 1vh 0 1vh 0;
-    height: 20vh;
+    /* height: 20vh; */
     width: 100%;
   }
   
@@ -123,26 +126,28 @@
   .color-indicator{
     float: right;
     clear: both;
-    height: 40%;
+    height: 50%;
     width: 100%;
   }
 
   .color-select{
 
-    float: right;
-    width: 80%;
-    height: 20vh;
+    /* float: right; */
+    margin: auto;
+    clear: both;
+    /* width: 80%; */
+    height: 100px;
   } 
 
   .hue-select {
     box-sizing: border-box;
-    float: left;
-    height: 20vh;
-    padding-top: 4vh;
-    width: 10%;
+    height: 10px;
+    margin-top: 10px;
+    clear: both;
   }
 
   .hue-bar{
+    position: relative;
     box-sizing: border-box;
       height: 100%;
       width: 100%;
