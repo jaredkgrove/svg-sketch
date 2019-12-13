@@ -1,13 +1,12 @@
 import React from 'react';
-import styled from 'styled-components'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import {fetchSketches} from '../actions/fetchSketches'
 import {clearCurrentSketch} from '../actions/clearCurrentSketch'
 import SketchesList from '../components/SketchesList'
 import NewSketchInput from '../components/NewSketchInput';
 
-import '../styles/home.css'
 import WelcomeSVG from '../containers/WelcomeSVG';
 
 class HomeView extends React.Component {
@@ -27,18 +26,11 @@ class HomeView extends React.Component {
 
     render(){
         return(
-            <HomeWrapper>
+            <>
                 <NewSketchInput />
                 <WelcomeSVG elements={this.props.currentSketch.elements}/>
-                <div className='recently-created'>
-                    <h1>Recently Created</h1>
-                    <SketchesList sketches={this.props.sketches} />
-                </div>
-                <div className='recently-updated'>
-                    <h1>Recently Updated</h1>
-                    <SketchesList sketches={[...this.props.sketches].sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated))}/>
-                </div>
-            </HomeWrapper>
+                <p>To get started, create a new sketch or check out one of the <Link to='/sketches'>Public Sketches</Link></p>
+            </>
         )
     }
 }
@@ -51,32 +43,3 @@ const mapStateToProps = state => {
   }
 
 export default connect(mapStateToProps, {fetchSketches, clearCurrentSketch })(HomeView)
-
-const HomeWrapper = styled.div`
-    text-align: center;
-`;
-
-// .home{
-//     text-align: center;
-// }
-
-// .recently-created{
-//     float: left;
-//     text-align: left;
-//     margin: 0 0 0 10vw;
-// }
-
-// .recently-updated{
-//     float: right;
-//     text-align: left;
-//     margin: 0 10vw 0 0;
-// }
-
-
-// .home .sketch-board.welcome{
-//   border-radius: 10px;
-//   margin: 10px;
-//   width: 80vw;
-//   display: block;
-//   margin: auto;
-// }

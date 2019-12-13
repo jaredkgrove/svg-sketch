@@ -15,7 +15,7 @@ const WelcomeSVG = () => {
                         return welcomSVGElements.slice(0, elementIndex)
                 })
                 }
-                , 150);
+                , 100);
                 return () => clearInterval(id);
         }
 

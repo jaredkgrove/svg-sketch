@@ -14,7 +14,7 @@ class App extends React.Component {
       <div className="App">
         <HeaderContainer />
         <Route exact path='/' render= {routerProps => <HomeView {...routerProps} />}/>
-        <Route exact path='/sketches/:sketchID' render= {routerProps => <SketchView {...routerProps} />}/>
+        <Route exact path='/sketches' render= {routerProps => <SketchView {...routerProps} />}/>
         <Route path='/sketches/:sketchID/edit' render= {routerProps => <EditView {...routerProps} />}/>
       </div>
     )
