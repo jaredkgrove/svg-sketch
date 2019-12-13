@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import styled from 'styled-components'
+
 
  class HueSelector extends React.Component {
      constructor(){
@@ -62,6 +63,7 @@ import { connect } from 'react-redux';
         this.hueBarClientRect = this.hueBar.current.getBoundingClientRect() 
         let x = e.clientX - this.hueBarClientRect.left
         if(x < 0){x=0}
+        if(x > this.hueBarClientRect.width){x = this.hueBarClientRect.width}
         console.log(x)
         this.setState({
             sliderPosition: x,
@@ -75,12 +77,31 @@ import { connect } from 'react-redux';
 
     render(){
         return (
-            <div ref={this.hueBar} onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseMove} onMouseUp={this.handleOnMouseUp}  className='hue-bar' style={{background: 'linear-gradient(to right,hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%),hsl(360,100%,50%))'}}>
+            <HueBar ref={this.hueBar} onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseMove} onMouseUp={this.handleOnMouseUp}>
                 <div style={{backgroundColor: `hsl(${this.state.hue},100%,50%)`, width: '15px', height: '15px', top: '-25%', borderRadius:'100%', border:'1px solid white', position: 'absolute', left:`calc(${this.state.sliderPosition}px - 7.5px)`, display:'inline-block'}}></div>
-            </div>
+            </HueBar>
         )
     }
-
  }
 
  export default HueSelector
+
+ const HueBar = styled.div`
+    box-sizing: border-box;
+    position: relative;
+    height: 10px;
+    margin-top: 10px;
+    clear: both;
+    background: linear-gradient(to right,hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%),hsl(360,100%,50%))
+`;
+
+//  .hue-select {
+
+//   }
+
+//   .hue-bar{
+//     position: relative;
+//     box-sizing: border-box;
+//       height: 100%;
+//       width: 100%;
+//   }

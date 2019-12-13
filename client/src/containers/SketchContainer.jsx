@@ -1,5 +1,6 @@
 import React from 'react';
 import ElementsContainer from './ElementsContainer'
+import styled from 'styled-components'
 
 class SketchContainer extends React.Component {
     constructor(){
@@ -132,16 +133,13 @@ class SketchContainer extends React.Component {
     getHSL = ({h, s, l}) => `hsl(${h},${s}%,${l}%)`
 
     handleOnKeyPress = (e) => {
-
         if(e.keyCode === 100){
             this.setState({
                 elements: this.state.elements.slice(0,-1),
                 isDrawing: false,
-        
             })
             this.startPoint=[]
         }
-
     }
 
 
@@ -149,15 +147,36 @@ class SketchContainer extends React.Component {
         const elementsToRender = () => [...this.state.elements, ...this.state.tempElements]
         return(
             <>
-                <div className='edit-sketch'>
-                    <svg ref={this.sketchArea} viewBox = {`0 0 1000 500`} className={"sketch-board"}  onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseMove} onMouseUp={this.handleOnMouseUp}>
-                        <ElementsContainer elements={elementsToRender()} />
-                    </svg>
-                    <button onClick={this.handleSubmit}>SAVE</button>
-                </div>
+                <SketchWrapper ref={this.sketchArea} viewBox = {`0 0 1000 500`} onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseMove} onMouseUp={this.handleOnMouseUp}>
+                    <ElementsContainer elements={elementsToRender()} />
+                </SketchWrapper>
+                <SaveButton onClick={this.handleSubmit}>SAVE</SaveButton>
             </>
         )
     }
 }
 
 export default SketchContainer
+
+const SketchWrapper = styled.svg`
+    box-sizing: border-box;
+    clear: none;
+    text-align: center;
+    float: right;
+    height: 100%;
+    width: 84%;
+    box-sizing: border-box ;
+    border-radius: 10px;
+    background: hsl(207, 5%, 90%);
+`;
+
+const SaveButton = styled.button`
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 8vh;
+      width: 10vw;
+      background: hsl(207, 80%, 50%);
+      padding: 0;
+      border: none;
+`;

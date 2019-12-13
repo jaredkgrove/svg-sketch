@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components'
 
 class SaturationLightnessSelector extends React.Component {
     constructor(){
@@ -13,15 +14,17 @@ class SaturationLightnessSelector extends React.Component {
     }
     
     handleOnMouseDown = (e) => {
-        this.canvasClientRect = this.canvas.current.getBoundingClientRect() 
-        let y = e.clientY - this.canvasClientRect.top - this.canvasClientRect.height
-        let x = e.clientX - this.canvasClientRect.left
-
-        this.setState({
-            selectorPosition: {x:x ,y:y},
-            saturation: this.getSaturation(x, y),
-            lightness: this.getLightness(x, y)
-        })
+        if(e.buttons === 1){
+            this.canvasClientRect = this.canvas.current.getBoundingClientRect() 
+            let y = e.clientY - this.canvasClientRect.top - this.canvasClientRect.height
+            let x = e.clientX - this.canvasClientRect.left
+            if(x > this.canvasClientRect.width * 3/4){return}
+            this.setState({
+                selectorPosition: {x:x ,y:y},
+                saturation: this.getSaturation(x, y),
+                lightness: this.getLightness(x, y)
+            })
+        }
     } 
 
     updateDimensions = () => {
@@ -62,12 +65,12 @@ class SaturationLightnessSelector extends React.Component {
         this.canvas.current.style.height='100%';
 
         let height = this.canvas.current.height
-        let width = this.canvas.current.width
+        let width = this.canvas.current.width * 3/4
 
         let brightness = context.createLinearGradient(0, 0, 0, height);
         brightness.addColorStop(0, "white");
         brightness.addColorStop(1, "black");
-
+        
         let saturation = context.createLinearGradient(0, 0, width, 0);
         saturation.addColorStop(0, "hsla(" + this.props.initColor.h + ",100%,50%,0)");
         saturation.addColorStop(1, "hsla(" + this.props.initColor.h + ",100%,50%,1)");
@@ -85,7 +88,7 @@ class SaturationLightnessSelector extends React.Component {
 
     getLightness = (x, y) => (100*this.hsvVToHslL(this.getHSVSat(x), this.getHSVValue(y)))
 
-    getHSVSat = (x) => ((x / this.canvasClientRect.width))
+    getHSVSat = (x) => ((x / (this.canvasClientRect.width * 3/4)))
 
     getHSVValue = (y) => ((-y / this.canvasClientRect.height))
 
@@ -104,20 +107,42 @@ class SaturationLightnessSelector extends React.Component {
     }
 
     getSelectorPosition = (sat, light) => {
-        let x = this.hslSatToHsvSat(sat/100, light/100) * this.canvasClientRect.width
+        let x = this.hslSatToHsvSat(sat/100, light/100) * this.canvasClientRect.width * 3/4
         let y = -this.canvasClientRect.height * this.hslLtoHsvV(sat/100, light/100)
         return {x:x, y:y}
     } 
       
     render(){
         return (
-            <div className='sat-light-select'>
-                <canvas   ref={this.canvas} onMouseDown={this.handleOnMouseDown}></canvas>
-                <div style={{backgroundColor: `hsl(${this.props.initColor.h},${this.state.saturation}%,${this.state.lightness}%)`, width: '10px', height: '10px', border:'2px solid white', borderRadius: '7px', position:'relative', top:`${this.state.selectorPosition.y-5}px`, left:`${this.state.selectorPosition.x-5}px`}}></div>
-            </div>
+            <SatLightWrapper>
+                <SatLightCanvas ref={this.canvas} onMouseDown={this.handleOnMouseDown} onMouseMove={this.handleOnMouseDown} hue={this.props.initColor.h} sat={this.state.saturation} light={this.state.lightness} ></SatLightCanvas>
+                <SelectorDiv selectorPosition={this.state.selectorPosition} hue={this.props.initColor.h} sat={this.state.saturation} light={this.state.lightness}></SelectorDiv>
+            </SatLightWrapper>
         )
     }
 
 }
 
  export default SaturationLightnessSelector
+
+ 
+const SatLightWrapper = styled.div`
+    float: right;
+    clear: both;
+    height: 50%;
+`;
+
+const SatLightCanvas = styled.canvas`
+    background-color: ${props => `hsl(${props.hue}, ${props.sat}%, ${props.light}%)`};
+`;
+
+const SelectorDiv = styled.div`
+    background-color: ${props => `hsl(${props.hue}, ${props.sat}%, ${props.light}%)`};
+    width: 10px;
+    height: 10px; 
+    border:2px solid white; 
+    border-radius: 7px; 
+    position: relative; 
+    top:${props => props.selectorPosition.y-5}px;
+    left:${props => props.selectorPosition.x-5}px;
+`;
