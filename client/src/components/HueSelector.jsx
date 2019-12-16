@@ -90,7 +90,7 @@ import styled from 'styled-components'
     box-sizing: border-box;
     position: relative;
     height: 10px;
-    margin-top: 10px;
+    margin: 10px 0px 10px 0px;
     clear: both;
     background: linear-gradient(to right,hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%),hsl(360,100%,50%))
 `;

@@ -11,9 +11,7 @@ const ColorSelectorContainer = (props) => {
         <ColorSelectorWrapper>
             <div>{props.text}</div>
             <SaturationLightnessSelector initColor={props.color} handleChange={props.handleUpdate}/>
-            {/* <div className='hue-select'> */}
-                <HueSelector handleChange={props.handleUpdate} initHue={props.color.h}/>
-            {/* </div> */}
+            <HueSelector handleChange={props.handleUpdate} initHue={props.color.h}/>
         </ColorSelectorWrapper>
     )
 }

@@ -18,7 +18,7 @@ const StrokeSelectorContainer = (props) => {
         <StrokeSelectorWrapper>
             <div>Line Width</div>
             <div className='line-width'>
-                <LineWidthSelector handleUpdate={handleLineWidthUpdate} lineWidth={props.settings.lineWidth}/>
+                <LineWidthSelector handleChange={handleLineWidthUpdate} lineWidth={props.settings.lineWidth}/>
             </div>
             <div>Line Type</div>
             <div className="line-type">
