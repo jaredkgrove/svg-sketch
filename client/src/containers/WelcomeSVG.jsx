@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import styled from 'styled-components'
 
 import ElementsContainer from './ElementsContainer'
-const WelcomeSVG = () => {
+const WelcomeSVG = ({transition, visible}) => {
     const [visibleElements, setVisibleElements] = useState([])
 
 
@@ -11,7 +12,10 @@ const WelcomeSVG = () => {
             const id = setInterval(() => {
                 setVisibleElements( () => {                     
                         elementIndex = elementIndex + 1
-                        if(elementIndex === welcomSVGElements.length){clearInterval(id)}
+                        if(elementIndex === welcomSVGElements.length){
+                          setTimeout(transition, 1000)
+                          clearInterval(id)
+                        }
                         return welcomSVGElements.slice(0, elementIndex)
                 })
                 }
@@ -21,14 +25,65 @@ const WelcomeSVG = () => {
 
         }, []);
     return(
-        <svg viewBox = {`0 0 1000 180`} className={"sketch-board welcome"} >
+      <WelcomeSVGWrapper visible={visible}>
+        <svg viewBox = {`0 0 1000 180`} >
             <ElementsContainer elements={visibleElements}/>
         </svg>
+        <DownArrow onClick={transition}>
+          <div></div>
+          <div></div>
+        </DownArrow>
+      </WelcomeSVGWrapper>
     )
 }
 
 export default WelcomeSVG
 
+const WelcomeSVGWrapper = styled.div`
+  position: absolute;
+  top: 8vh;
+  left: 0px;
+  width: 100vw;
+  height:92vh;
+  transition: opacity 1s;
+  opacity:${props => props.visible ? '1': '0'};
+`;
+
+const DownArrow = styled.div`
+  position: absolute;
+  
+  height:200px;
+  width: 100vw;
+
+  bottom: 0px;
+  overflow:hidden;
+  text-align:center;
+  :hover{
+    > div{
+      background-color: hsl(187, 5%, 80%);
+    }
+  }
+
+  > div{
+    display: inline-block;
+    z-index: 2;
+    height: 20px;
+    width: 200px;
+    background-color: hsl(187, 5%, 40%);
+
+    margin: auto 0px;
+  }
+  > :nth-child(1){
+    transform:  translate(0px) rotate(45deg);
+
+
+  }
+  > :nth-child(2){
+    transform: translate(-71px) rotate(-45deg) ;
+
+  }
+
+`;
 
 const welcomSVGElements = [
     {

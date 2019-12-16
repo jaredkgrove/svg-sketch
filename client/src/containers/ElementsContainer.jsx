@@ -9,13 +9,13 @@ import Polyline from '../components/Polyline';
         {props.elements.map( (elem) => {
             switch(elem.type) {
                 case 'Circle':
-                  return <Circle properties={elem.properties}/>
+                  return <Circle key={elem.type + elem.properties.id} properties={elem.properties}/>
                 case 'Line':
-                    return <Line properties={elem.properties}/>
+                    return <Line key={elem.type + elem.properties.id} properties={elem.properties}/>
                 case 'Rectangle':
-                  return <Rectangle properties={elem.properties}/>
+                  return <Rectangle key={elem.type + elem.properties.id} properties={elem.properties}/>
                 case 'Polyline':
-                    return <Polyline properties={elem.properties}/>
+                    return <Polyline key={elem.type + elem.properties.id} properties={elem.properties}/>
                 default:
                   return <div>Don't know what this is</div>;
               }        

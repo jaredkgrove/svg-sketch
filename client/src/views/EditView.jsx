@@ -5,6 +5,7 @@ import {clearCurrentSketch} from '../actions/clearCurrentSketch'
 import { connect } from 'react-redux';
 import SketchContainer from '../containers/SketchContainer';
 import SettingsContainer from '../containers/SettingsContainer'
+import styled from 'styled-components'
 
 class EditView extends React.Component {
 
@@ -32,11 +33,11 @@ class EditView extends React.Component {
         }
 
         return(
-            <div className='edit-view'>
+            <EditViewWrapper>
                 {loadSaveStatus()}
                 <SketchContainer settings={this.props.settings} currentSketch={this.props.currentSketch} handleSave={this.handleUpdateSketch}/>
                 <SettingsContainer settings={this.props.settings}/>
-            </div>
+            </EditViewWrapper>
         )
     }
 }
@@ -58,4 +59,9 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditView)
 
-
+const EditViewWrapper = styled.div`
+    position: absolute;
+    top: 8vh;
+    width: 100vw
+    left: 0px;
+`;

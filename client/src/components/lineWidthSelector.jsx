@@ -35,7 +35,6 @@ import styled from 'styled-components'
       }
     
      componentDidUpdate(prevProps, prevState){
-         console.log(this.state.lineWidth)
          if(this.state.sliderPosition && this.state.sliderPosition !== prevState.sliderPosition && (this.state.lineWidth !== prevState.lineWidth)){
             this.props.handleChange(this.state.lineWidth)
          }

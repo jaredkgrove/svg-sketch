@@ -64,7 +64,6 @@ import styled from 'styled-components'
         let x = e.clientX - this.hueBarClientRect.left
         if(x < 0){x=0}
         if(x > this.hueBarClientRect.width){x = this.hueBarClientRect.width}
-        console.log(x)
         this.setState({
             sliderPosition: x,
             hue: this.getHue(x)

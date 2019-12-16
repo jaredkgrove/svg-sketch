@@ -4,15 +4,10 @@
   background: hsl(207, 20%, 25%);
   min-height: 100vh;
   color: hsl(207, 10%, 90%);
+  overflow: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
-  line-height: 8vh;
-  min-height: 8vh;
-  font-size: calc(10px + 2vmin);
-  margin-bottom: 1vh;
-}
+
 
 .App-link {
   color: hsl(207, 50%, 60%);

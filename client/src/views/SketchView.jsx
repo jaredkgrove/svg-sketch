@@ -2,6 +2,7 @@ import React from 'react';
 import {fetchSketch} from '../actions/fetchSketch'
 import {deleteSketch} from '../actions/deleteSketch'
 import {clearCurrentSketch} from '../actions/clearCurrentSketch'
+import styled from 'styled-components'
 
 
 import {fetchSketches} from '../actions/fetchSketches'
@@ -37,12 +38,11 @@ class SketchView extends React.Component {
 
     render(){
         return(
-            <>
-                <NewSketchInput />
+            <SketchViewWrapper visible={this.props.visible}>
                 <SketchData sketch={this.props.currentSketch} handleDelete={this.handleDelete}/>
                 <SketchPreviewContainer elements={this.props.currentSketch.elements} handleSave={this.handleUpdateSketch}/>
                 <SketchesList sketches={[...this.props.sketches].sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated))} setSketch={this.setCurrentSketch} text='sketches'/>
-            </>
+            </SketchViewWrapper>
         )
     }
 }
@@ -56,5 +56,12 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {fetchSketch, fetchSketches, deleteSketch, clearCurrentSketch})(SketchView)
 
+const SketchViewWrapper = styled.div`
+  position: absolute;
+  top: 8vh;
+  left: 0px;
+  transition: opacity 1s, display 1s;
 
-
+  z-index:${props => props.visible ? '': '-1'};
+  opacity:${props => props.visible ? '1': '0'};
+`;

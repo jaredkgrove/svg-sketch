@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
 const SketchesList = ({ sketches, text, setSketch }) => {
@@ -31,7 +30,10 @@ const SketchListWrapper = styled.div`
   align-content: flex-start;
 `;
 
-const SketchLink = styled(Link)`
+const SketchLink = styled.div`
   text-align: left;
-
+  cursor: pointer;
+  :hover{
+    color: hsl(207, 80%, 50%);
+  }
 `;
