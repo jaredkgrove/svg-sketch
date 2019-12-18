@@ -10,10 +10,9 @@ import {fetchSketches} from '../actions/fetchSketches'
 import { connect } from 'react-redux';
 import SketchPreviewContainer from '../containers/SketchPreviewContainer';
 import SketchesList from '../components/SketchesList'
-import NewSketchInput from '../components/NewSketchInput'
 import SketchData from '../components/SketchData'
 
-class SketchView extends React.Component {
+class SketchPane extends React.Component {
 
     componentDidMount(){
         if(!this.props.sketches.length){
@@ -38,11 +37,11 @@ class SketchView extends React.Component {
 
     render(){
         return(
-            <SketchViewWrapper visible={this.props.visible}>
+            <SketchPaneWrapper>
                 <SketchData sketch={this.props.currentSketch} handleDelete={this.handleDelete}/>
                 <SketchPreviewContainer elements={this.props.currentSketch.elements} handleSave={this.handleUpdateSketch}/>
                 <SketchesList sketches={[...this.props.sketches].sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated))} setSketch={this.setCurrentSketch} text='sketches'/>
-            </SketchViewWrapper>
+            </SketchPaneWrapper>
         )
     }
 }
@@ -54,14 +53,12 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, {fetchSketch, fetchSketches, deleteSketch, clearCurrentSketch})(SketchView)
+export default connect(mapStateToProps, {fetchSketch, fetchSketches, deleteSketch, clearCurrentSketch})(SketchPane)
 
-const SketchViewWrapper = styled.div`
-  position: absolute;
-  top: 8vh;
+const SketchPaneWrapper = styled.div`
+
   left: 0px;
+  height: 100vh;
+  
   transition: opacity 1s, display 1s;
-
-  z-index:${props => props.visible ? '': '-1'};
-  opacity:${props => props.visible ? '1': '0'};
 `;

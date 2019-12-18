@@ -1,10 +1,15 @@
-.App {
+#root {
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background: hsl(207, 20%, 25%);
   min-height: 100vh;
+  max-height: 100vh;
   color: hsl(207, 10%, 90%);
   overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 

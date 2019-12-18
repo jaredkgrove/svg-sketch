@@ -15,13 +15,16 @@ const HeaderContainer = () => {
 export default HeaderContainer
 
 const HeaderWrapper = styled.header`
-    position: absolute;
+    position: fixed;
     width: 100vw; 
     height: 8vh; 
+    top: 0px;
     z-index:1;
     background-color: #282c34;
     line-height: 8vh;
     font-size: calc(10px + 2vmin);
-    margin-bottom: 1vh;
+    margin: 0px 0px 1vh 0px;
+    padding: 0px;
+
 `;
 

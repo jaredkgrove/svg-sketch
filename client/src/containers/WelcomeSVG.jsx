@@ -40,11 +40,10 @@ const WelcomeSVG = ({transition, visible}) => {
 export default WelcomeSVG
 
 const WelcomeSVGWrapper = styled.div`
-  position: absolute;
-  top: 8vh;
-  left: 0px;
+  position: relative;
   width: 100vw;
-  height:92vh;
+  height: 100vh;
+  padding-top: 8vh;
   transition: opacity 1s;
   opacity:${props => props.visible ? '1': '0'};
 `;

@@ -12,12 +12,14 @@ import EditView from './views/EditView';
 class App extends React.Component {
   render(){
     return (
-      <div className="App" style={{position: 'relative'}}>
+      // <div className="App" >
+      <>
         <HeaderContainer />
         <Route exact path='/' render= {routerProps => <><NewSketchInput /><HomeView {...routerProps} /></>}/>
         {/* <Route exact path='/sketches' render= {routerProps => <SketchView {...routerProps} />}/> */}
         <Route path='/sketches/:sketchID/edit' render= {routerProps => <EditView {...routerProps} />}/>
-      </div>
+       {/* </div> */}
+      </>
     )
   }
 }

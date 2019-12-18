@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import {fetchSketches} from '../actions/fetchSketches'
 import {clearCurrentSketch} from '../actions/clearCurrentSketch'
-import SketchView from './SketchView'
+import SketchPane from './SketchPane'
 
 import WelcomeSVG from '../containers/WelcomeSVG';
 
@@ -12,7 +12,7 @@ class HomeView extends React.Component {
     constructor(){
         super()
         this.state = {
-            hasTransitioned: false
+            currentView: 0
         }
     }
     componentDidMount(){
@@ -28,30 +28,37 @@ class HomeView extends React.Component {
         // }
     }
 
-    transitionToSketches = () => {
-        this.setState({
-            hasTransitioned: true
-        })
-    }
 
     handleScroll = (e) => {
         e.preventDefault()
         if(e.deltaY > 0){
-            this.setState({
-                hasTransitioned: true
-            })
+          this.nextView()
         }else{
+          this.previousView()
+        }
+      }
+    
+      nextView = () => {
+        if (this.state.currentView < 1){
+          this.setState({
+            currentView: this.state.currentView + 1
+          })
+        }
+      }
+    
+      previousView = () => {
+        if (this.state.currentView > 0){
             this.setState({
-                hasTransitioned: false
+                currentView: this.state.currentView - 1
             })
         }
-    }
+      }
 
     render(){
         return(
-            <HomeViewWrapper hasTransitioned={this.state.hasTransitioned} onWheel={this.handleScroll} onTouchMove={this.handleScroll}>
-                <WelcomeSVG transition={this.transitionToSketches} visible={!this.state.hasTransitioned}/>
-                <SketchView visible={this.state.hasTransitioned}/>
+            <HomeViewWrapper view={this.state.currentView} onWheel={this.handleScroll} onTouchMove={this.handleScroll}>
+                <WelcomeSVG transition={this.nextView} visible={!this.state.hasTransitioned}/>
+                <SketchPane visible={this.state.hasTransitioned}/>
             </HomeViewWrapper>
         )
     }
@@ -67,7 +74,9 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {fetchSketches, clearCurrentSketch })(HomeView)
 
 const HomeViewWrapper = styled.div`
-  position: relative;
-  width: 100vw;
-  height: 100vh;
+    top: ${props => props.view === 0 ? '0px' : '-100vh'};
+    transition: top 1s ease-in
+    position: relative;
+    width: 100vw;
+    overflow:hidden;
 `;

@@ -33,10 +33,11 @@ const NewSketchInput = (props) => {
 export default connect(null, { createSketch })(NewSketchInput)
 
 const FormWrapper = styled.form`
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 0px;
     right: 0;
     height: 8vh;
+    z-index:2;
 `;
 
 const SubmitInput = styled.input`
@@ -47,6 +48,8 @@ const SubmitInput = styled.input`
     padding: 0;
     margin: 0;
     top:0;
+    cursor: pointer;
+    color: hsl(207, 10%, 90%);
 `;
 
 const TextInput = styled.input`

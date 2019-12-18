@@ -40,6 +40,9 @@ const SketchData = ({sketch, handleDelete}) => (
         width: 10vw;
         line-height: 8vh;
         background: hsl(207, 80%, 50%);
+        :hover{
+            color: hsl(207, 10%, 90%);
+        }
     }
 `;
 
@@ -55,5 +58,6 @@ const Button = styled.button`
     line-height: 8vh;
     margin-top: 10px;
     background: hsl(15, 80%, 50%);
+    cursor: pointer;
 `;
 
