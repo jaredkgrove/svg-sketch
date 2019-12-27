@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components'
 
 import ElementsContainer from './ElementsContainer'
-const WelcomeSVG = ({transition, visible}) => {
-    const [visibleElements, setVisibleElements] = useState([])
+  const WelcomeSVG = ({transition, visible}) => {
+  const [visibleElements, setVisibleElements] = useState([])
 
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const WelcomeSVG = ({transition, visible}) => {
                 return () => clearInterval(id);
         }
 
-        }, []);
+        }, [transition]);
     return(
       <WelcomeSVGWrapper visible={visible}>
         <svg viewBox = {`0 0 1000 180`} >
