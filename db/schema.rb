@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_10_24_200605) do
   create_table "elements", force: :cascade do |t|
     t.integer "sketch_id"
     t.string "elementable_type"
-    t.integer "elementable_id"
+    t.bigint "elementable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["elementable_type", "elementable_id"], name: "index_elements_on_elementable_type_and_elementable_id"

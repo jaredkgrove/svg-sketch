@@ -17,11 +17,6 @@ class Api::V1::ElementsController < ApplicationController
       end
     end
   
-    # # DELETE /users/1
-    # def destroy
-    #   @user.destroy
-    # end
-  
     private
       def set_sketch
         @sketch = Sketch.find(params[:sketch_id])
