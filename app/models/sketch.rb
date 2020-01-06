@@ -1,5 +1,6 @@
 class Sketch < ApplicationRecord
     has_many :elements
+    belongs_to :user, required: false
     accepts_nested_attributes_for :elements
     validates :name, presence: true
     validates :name, uniqueness: true

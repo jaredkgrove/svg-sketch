@@ -10,7 +10,6 @@ const NewSketchInput = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         if(name){
-
             props.createSketch({name: name}).then(error => error ? setError(true):setError(false))
         }else{
             setError(true)

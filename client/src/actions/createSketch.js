@@ -20,7 +20,9 @@ export const createSketch = (data) => {
                 type: 'CREATE_SKETCH', 
                 payload: {
                     id: sketch['data']['id'], 
-                    name: sketch['data']['attributes']['name'], 
+                    name: sketch['data']['attributes']['name'],
+                    created: sketch['data']['attributes']['created'],
+                    lastUpdated: sketch['data']['attributes']['last_updated'],
                     elements: sketch['included'].map((e) => ({type: e.attributes.elementable_type, properties: e.attributes.elementable}))
                 }
             })

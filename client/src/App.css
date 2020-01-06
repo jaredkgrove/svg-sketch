@@ -14,17 +14,6 @@
 
 
 
-.App-link {
-  color: hsl(207, 50%, 60%);
-  float: left;
-  margin-left: 10px;
-
-}
-
-.App-link:hover {
-  color: hsl(207, 80%, 50%);
-}
-
 a{
   text-decoration: none;
   color: hsl(207, 10%, 90%);

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import {fetchSketches} from '../actions/fetchSketches'
 import {clearCurrentSketch} from '../actions/clearCurrentSketch'
 import SketchPane from './SketchPane'
+import NewSketchInput from '../components/NewSketchInput';
 
 import WelcomeSVG from '../containers/WelcomeSVG';
 
@@ -56,7 +57,9 @@ class HomeView extends React.Component {
 
     render(){
         return(
+
             <HomeViewWrapper view={this.state.currentView} onWheel={this.handleScroll} onTouchMove={this.handleScroll}>
+                <NewSketchInput />
                 <WelcomeSVG transition={this.nextView} visible={!this.state.hasTransitioned}/>
                 <SketchPane visible={this.state.hasTransitioned}/>
             </HomeViewWrapper>
