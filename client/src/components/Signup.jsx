@@ -3,13 +3,29 @@ import styled from 'styled-components'
 
 const Signup = () => {
 //    const [currentUser, setCurrentUser] = useState(null);
-   const [credentials, setCredentials] = useState({email:'', password:'', passwordConfirmation:''});
+   const [credentials, setCredentials] = useState({username:'', password:'', passwordConfirmation:''});
 
    const handleSubmit = (e) => {
       e.preventDefault()
-      if(credentials.password === credentials.passwordConfirmation){
-        console.log(credentials)
-      }
+      fetch(`/api/v1/signup`,{
+         headers:{
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+         method: 'POST',
+         body: JSON.stringify({
+            user: credentials
+         })
+      })
+      .then((resp) => {
+            
+            // if(!resp.ok){throw Error(resp.statusText);}
+            return resp.json()
+      })
+      .then((json) => { 
+         console.log(json)
+      })
+      .catch(error => console.log(error))
    }
 
    const handleChange = (e) => {
@@ -20,7 +36,7 @@ const Signup = () => {
    return(<SignupWrapper>
       <h1>Sign Up</h1>
       <SignupForm onSubmit={handleSubmit}>
-         <input type="text" name="email" placeholder="Email" onChange={handleChange}/><br/>
+         <input type="text" name="username" placeholder="Username" onChange={handleChange}/><br/>
          <input type="text" name="password" placeholdeR="Password" onChange={handleChange}/><br/>
          <input type="text" name="passwordConfirmation" placeholdeR="Confirm Password" onChange={handleChange}/><br/>
          <input type="submit" value="Sign Up"/>

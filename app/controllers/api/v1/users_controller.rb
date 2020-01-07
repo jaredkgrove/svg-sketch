@@ -1,3 +1,4 @@
+require 'pry'
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
@@ -15,11 +16,12 @@ class Api::V1::UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
-
+    @user = User.new(user_params) if params[:password] === params[:passwordConfirmation]
     if @user.save
-      @token = encode_toekn(user_id: @user.id)
-      render json: {user: @user, jwt: @token}, status: :created, location: @user
+      @token = encode_token(user_id: @user.id)
+      user_json = UserSerializer.new(@user).serialized_json
+
+      render json: {user: user_json, jwt: @token}, status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -47,6 +49,6 @@ class Api::V1::UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:email, :password)
+      params.require(:user).permit(:username, :password)
     end
 end

@@ -17,7 +17,9 @@ class SketchPane extends React.Component {
     componentDidMount(){
         if(!this.props.sketches.length){
             this.props.fetchSketches().then(resp => {
-                this.props.fetchSketch(resp.payload[0].id)
+                if(resp.payload.length){
+                    this.props.fetchSketch(resp.payload[0].id)
+                }
             })
         }else{
             this.props.fetchSketch(this.props.sketches[0].id)

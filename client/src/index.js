@@ -11,9 +11,9 @@ import thunk from 'redux-thunk';
 import sketchesReducer from './reducers/sketchesReducer.js'; 
 import currentSketchReducer from './reducers/currentSketchReducer.js'; 
 import sketchSettingsReducer from './reducers/sketchSettingsReducer.js'; 
-
+import currentUserReducer from './reducers/currentUserReducer'; 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const rootReducer = combineReducers({sketches: sketchesReducer, currentSketch: currentSketchReducer, settings: sketchSettingsReducer})
+const rootReducer = combineReducers({sketches: sketchesReducer, currentSketch: currentSketchReducer, settings: sketchSettingsReducer, currentUser: currentUserReducer})
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
  
 ReactDOM.render(

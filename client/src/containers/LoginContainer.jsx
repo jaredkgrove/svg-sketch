@@ -1,24 +1,15 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
+import {login} from '../actions/currentUser'
+import { connect } from 'react-redux';
 
-const Login = () => {
+const LoginContainer = ({ login }) => {
    // const [currentUser, setCurrentUser] = useState(null);
-   const [credentials, setCredentials] = useState({email:'', password:''});
+   const [credentials, setCredentials] = useState({username:'', password:''});
 
    const handleSubmit = (e) => {
       e.preventDefault()
-      fetch(`/api/v1/login`,{
-         method: 'POST',
-      })
-      .then((resp) => {
-            
-            if(!resp.ok){throw Error(resp.statusText);}
-            return resp.json()
-      })
-      .then((json) => { 
-         console.log(json)
-      })
-      .catch(error => console.log(error))
+      login(credentials)
    }
 
    const handleChange = (e) => {
@@ -29,14 +20,14 @@ const Login = () => {
    return(<LoginWrapper>
       <h1>Login</h1>
       <LoginForm onSubmit={handleSubmit}>
-         <input type="text" name="email" placeholder="email" onChange={handleChange}/><br/>
-         <input type="text" name="password" placeholdeR="password" onChange={handleChange}/><br/>
+         <input type="text" name="username" placeholder="Username" onChange={handleChange}/><br/>
+         <input type="text" name="password" placeholdeR="Password" onChange={handleChange}/><br/>
          <input type="submit" value="Login"/>
       </LoginForm>
    </LoginWrapper>
    )
 };
-export default Login
+export default connect(null, { login })(LoginContainer)
 
 const LoginWrapper = styled.div`
    position: absolute
@@ -52,7 +43,7 @@ const LoginWrapper = styled.div`
 `;
 
 const LoginForm = styled.form` 
-display: inline-block;
+   display: inline-block;
     background: hsl(207, 80%, 10%);
     opacity: 1;
    padding: 10px;

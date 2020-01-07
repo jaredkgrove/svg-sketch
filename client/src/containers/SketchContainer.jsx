@@ -29,7 +29,9 @@ class SketchContainer extends React.Component {
     }
     
     updateDimensions = () => {
-        this.sketchClientRect = this.sketchArea.current.getBoundingClientRect() 
+        if(this.sketchArea.current){
+            this.sketchClientRect = this.sketchArea.current.getBoundingClientRect() 
+        }
     }
 
     componentWillUnmount() {

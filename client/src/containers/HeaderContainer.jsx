@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
 
-import Login from '../components/Login'
+import LoginContainer from './LoginContainer'
 import Signup from '../components/Signup'
 
 import { NavLink } from 'react-router-dom';
@@ -20,7 +20,7 @@ const HeaderContainer = () => {
 
     const renderForm = () =>{
         if(showLogin){
-           return <Login/>
+           return <LoginContainer/>
         }else if(showSignup){
             return <Signup/>
         }

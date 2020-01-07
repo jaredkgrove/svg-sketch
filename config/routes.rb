@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/login', to: 'auth#create'
+      get '/get_current_user', to: 'auth#get_current_user'
+      post '/signup', to: 'users#create'
       resources :sketches do
         resources :elements
       end
