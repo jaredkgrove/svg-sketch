@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
     end
 
     def current_user
-        @current_user ||= User.find(id: decode_token_and_get_user_id)
+        @current_user ||= User.find_by(id: decode_token_and_get_user_id)
     end
 
     def logged_in?
@@ -16,8 +16,11 @@ class ApplicationController < ActionController::API
     end
 
     def decode_token_and_get_user_id
-        # binding.pry
-        JWT.decode(request.headers["Authorization"], ENV['JWT_TOKEN_SECRET'])[0]["id"]
+        begin
+            JWT.decode(request.headers["Authorization"], ENV['JWT_TOKEN_SECRET'])[0]["user_id"] 
+        rescue JWT::DecodeError
+            nil
+        end
     end
 
 end

@@ -12,14 +12,16 @@ import { connect } from 'react-redux';
 
 class App extends React.Component {
   componentDidMount() {
-    console.log(localStorage.getItem('token'))
-      this.props.getCurrentUser(localStorage.getItem('token'))
+    const token = localStorage.getItem("token")
+    if(token){
+      this.props.getCurrentUser(token)
+    }
   }
   render(){
     return (
       // <div className="App" >
       <>
-        <HeaderContainer />
+        <HeaderContainer currentUser={this.props.currentUser}/>
         <Route exact path='/' render= {routerProps => <HomeView {...routerProps} />}/>
         <Route path='/sketches/:sketchID/edit' render= {routerProps => <EditView {...routerProps} />}/>
        {/* </div> */}

@@ -9,8 +9,7 @@ const currentSketchReducer = (state = {id:'', name: '', elements: [], created:''
       case 'FETCH_CURRENT_SKETCH':
       case 'CLEAR_CURRENT_SKETCH':
       case 'UPDATE_CURRENT_SKETCH':
-          return {...state, id: action.payload.id, name: action.payload.name, elements: action.payload.elements, created:action.payload.created, lastUpdated:action.payload.lastUpdated, loading: false, saving: false}   
-    
+          return {...state, id: action.payload.id, name: action.payload.name, elements: action.payload.elements, created:action.payload.created, lastUpdated:action.payload.lastUpdated, public: action.payload.public, loading: false, saving: false}   
       default:
         return state;
     }

@@ -1,8 +1,13 @@
 
 export const deleteSketch = (id) => {
-
+    const token = localStorage.getItem('token')
     return (dispatch) => {
         fetch(`/api/v1/sketches/${id}`,{
+            headers:{
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': token
+             },
             method: 'DELETE',
         })
         .then((resp) => {

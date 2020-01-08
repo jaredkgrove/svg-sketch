@@ -1,31 +1,15 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
+import {signup} from '../actions/currentUser'
+import { connect } from 'react-redux';
 
-const Signup = () => {
+const SignupContainer = ({signup}) => {
 //    const [currentUser, setCurrentUser] = useState(null);
    const [credentials, setCredentials] = useState({username:'', password:'', passwordConfirmation:''});
 
    const handleSubmit = (e) => {
       e.preventDefault()
-      fetch(`/api/v1/signup`,{
-         headers:{
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-         method: 'POST',
-         body: JSON.stringify({
-            user: credentials
-         })
-      })
-      .then((resp) => {
-            
-            // if(!resp.ok){throw Error(resp.statusText);}
-            return resp.json()
-      })
-      .then((json) => { 
-         console.log(json)
-      })
-      .catch(error => console.log(error))
+      signup(credentials)
    }
 
    const handleChange = (e) => {
@@ -44,8 +28,8 @@ const Signup = () => {
    </SignupWrapper>
    )
 };
-export default Signup
 
+export default connect(null, { signup })(SignupContainer)
 const SignupWrapper = styled.div`
    position: absolute
     height: 92vh;

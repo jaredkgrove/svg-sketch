@@ -2,18 +2,27 @@ class Api::V1::SketchesController < ApplicationController
     before_action :set_sketch, only: [:show, :update, :destroy]
 
     def index
-      @sketches = Sketch.all
+      if logged_in?
+        @sketches = Sketch.where(user_id: nil).or(Sketch.where(user_id: current_user.id))
+      else
+        @sketches = Sketch.where(user_id: nil)
+      end
       sketches_json = SketchSerializer.new(@sketches).serialized_json
       render json: sketches_json
     end
   
     def show
-      sketch_json = SketchSerializer.new(@sketch, {include: [:elements]}).serialized_json
-      render json: sketch_json
+      if !@sketch.user || current_user === @sketch.user
+        sketch_json = SketchSerializer.new(@sketch, {include: [:elements]}).serialized_json
+        render json: sketch_json
+      else
+        render json: {errors: 'You are not authorized to view this resource'}, status: :unauthorized
+      end
     end
   
     def create
       @sketch = Sketch.new(sketch_params)
+      @sketch.user = current_user if logged_in?
       if @sketch.save
         sketch_json = SketchSerializer.new(@sketch, {include: [:elements]}).serialized_json
         render json: sketch_json, status: :created
@@ -23,7 +32,7 @@ class Api::V1::SketchesController < ApplicationController
     end
   
     def update
-      @sketch.update_sketch_elements_from_json(elements_attributes_params)
+      @sketch.update_sketch_elements_from_json(elements_attributes_params) if !@sketch.user || @sketch.user === current_user
       if @sketch.save
         sketch_json = SketchSerializer.new(@sketch, {include: [:elements]}).serialized_json
         render json: sketch_json

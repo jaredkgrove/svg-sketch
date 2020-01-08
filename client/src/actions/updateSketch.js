@@ -1,12 +1,13 @@
 export const updateSketch = (id, data) => {
-
+    const token = localStorage.getItem('token')
     return (dispatch) => {
         dispatch({ type: 'SAVING_SKETCH' });
 
         fetch(`/api/v1/sketches/${id}`,{
             headers:{
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Authorization': token
             },
             method: 'PATCH',
             body: JSON.stringify(data)

@@ -18,10 +18,10 @@ class Api::V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params) if params[:password] === params[:passwordConfirmation]
     if @user.save
-      @token = encode_token(user_id: @user.id)
+      token = encode_token(user_id: @user.id)
       user_json = UserSerializer.new(@user).serialized_json
 
-      render json: {user: user_json, jwt: @token}, status: :created, location: @user
+      render json: {user: user_json, jwt: token}, status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end

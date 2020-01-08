@@ -2,9 +2,9 @@ const currentUserReducer = (state = null, action) => {
 
     switch(action.type) {
       case 'SET_CURRENT_USER':
-        window.localStorage.setItem('token', action.user.jwt)
-        return action.user
-    
+        return action.payload
+      case 'CLEAR_CURRENT_USER':
+        return null
       default:
         return state;
     }

@@ -7,7 +7,7 @@ const SketchesList = ({ sketches, text, setSketch }) => {
  
   return (
       <SketchListWrapper>
-          <h1 >{text}</h1>
+          <h3 style={{padding:'0px', margin: '0px auto 5px auto', width: '100%'}}>{text}</h3>
           {renderSketches()}
       </SketchListWrapper>
   );
@@ -28,10 +28,12 @@ const SketchListWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: flex-start;
+  text-align: center;
 `;
 
 const SketchLink = styled.div`
   text-align: left;
+  width: 100%;
   cursor: pointer;
   :hover{
     color: hsl(207, 80%, 50%);

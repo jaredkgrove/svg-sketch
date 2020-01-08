@@ -26,8 +26,17 @@ class SketchPane extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.currentUser !== this.props.currentUser){
+            this.props.fetchSketches().then(resp => {
+                if(resp.payload.length){
+                    this.props.fetchSketch(resp.payload[0].id)
+                }
+            })
+        }
+    }
+
     handleDelete = () => {
-        this.props.clearCurrentSketch()
         this.props.deleteSketch(this.props.currentSketch.id)
         this.setCurrentSketch(this.props.sketches[0].id)
     }
@@ -37,12 +46,19 @@ class SketchPane extends React.Component {
         this.props.fetchSketch(id)
     }
 
+    renderUserSketches = () => {
+        if(this.props.currentUser){
+            return <SketchesList sketches={[...this.props.sketches].filter(sketch => !sketch.public).sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated))} setSketch={this.setCurrentSketch} text={`${this.props.currentUser.username}'s Sketches`}/>
+        }
+    }
+
     render(){
         return(
             <SketchPaneWrapper>
                 <SketchData sketch={this.props.currentSketch} handleDelete={this.handleDelete}/>
                 <SketchPreviewContainer elements={this.props.currentSketch.elements} handleSave={this.handleUpdateSketch}/>
-                <SketchesList sketches={[...this.props.sketches].sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated))} setSketch={this.setCurrentSketch} text='sketches'/>
+                <SketchesList sketches={[...this.props.sketches].filter(sketch => sketch.public).sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated))} setSketch={this.setCurrentSketch} text='Public Sketches'/>
+                {this.renderUserSketches()}
             </SketchPaneWrapper>
         )
     }
@@ -51,16 +67,15 @@ class SketchPane extends React.Component {
 const mapStateToProps = state => {
     return {
         sketches: state.sketches,
-        currentSketch: state.currentSketch
+        currentSketch: state.currentSketch,
+        currentUser: state.currentUser
     }
   }
 
 export default connect(mapStateToProps, {fetchSketch, fetchSketches, deleteSketch, clearCurrentSketch})(SketchPane)
 
-const SketchPaneWrapper = styled.div`
-
+const SketchPaneWrapper = styled.div` 
   left: 0px;
   height: 100vh;
-  
   transition: opacity 1s, display 1s;
 `;

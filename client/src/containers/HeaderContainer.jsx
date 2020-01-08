@@ -2,43 +2,68 @@ import React, {useState} from 'react';
 import styled from 'styled-components'
 
 import LoginContainer from './LoginContainer'
-import Signup from '../components/Signup'
+import SignupContainer from './SignupContainer'
+import { connect } from 'react-redux';
+import {logout} from '../actions/currentUser'
 
 import { NavLink } from 'react-router-dom';
 
-const HeaderContainer = () => {
+const HeaderContainer = ({ currentUser, logout }) => {
     const [showLogin, setShowLogin] = useState(false);
     const [showSignup, setShowSignup] = useState(false);
+
     const handleLoginClick = () => {
         setShowSignup(false)
         setShowLogin(!showLogin)
     }
+
     const handleSignupClick = () => {
         setShowSignup(!showSignup)
         setShowLogin(false)
+    }
+
+    const handleLogoutClick = () => {
+        logout()
     }
 
     const renderForm = () =>{
         if(showLogin){
            return <LoginContainer/>
         }else if(showSignup){
-            return <Signup/>
+            return <SignupContainer/>
         }
     }
+
+    const renderLoginLogoutSignup = () => {
+        if(currentUser){
+            if(showLogin || showSignup){
+                setShowLogin(false)
+                setShowSignup(false)
+            }
+
+            return <HeaderItem><LoginButton onClick={handleLogoutClick}>Logout</LoginButton></HeaderItem>
+
+        }else{
+            return (
+                <>
+                    <HeaderItem><LoginButton onClick={handleLoginClick}>Login</LoginButton></HeaderItem>
+                    <HeaderItem><LoginButton onClick={handleSignupClick}>Signup</LoginButton></HeaderItem>
+                </>
+            )
+        }
+    }
+
     return(
         <HeaderWrapper>
             <HeaderItem><NavLink to="/">Home</NavLink></HeaderItem>
-            <HeaderItem><LoginButton onClick={handleLoginClick}>Login</LoginButton></HeaderItem>
-            <HeaderItem><LoginButton onClick={handleSignupClick}>Signup</LoginButton></HeaderItem>
-
+            {renderLoginLogoutSignup()}
             {renderForm()}
             {/* <NavLink className='App-link' style={{ marginRight: '10px' }} to="/sketches">Sketches</NavLink> */}
         </HeaderWrapper>
     )
 }
 
-export default HeaderContainer
-
+export default connect(null, { logout })(HeaderContainer)
 const HeaderWrapper = styled.ul`
     list-style-type: none;  
     position: fixed;
