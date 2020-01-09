@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {login} from '../actions/currentUser'
 import { connect } from 'react-redux';
 
-const LoginContainer = ({ login }) => {
+const LoginContainer = ({ login, hideForm }) => {
    // const [currentUser, setCurrentUser] = useState(null);
    const [credentials, setCredentials] = useState({username:'', password:''});
 
@@ -17,7 +17,8 @@ const LoginContainer = ({ login }) => {
       setCredentials({...credentials, [name]:value})
    }
 
-   return(<LoginWrapper>
+   return(
+   <LoginWrapper onClick={(e) => e.target === e.currentTarget ? hideForm():null }>
       <h1>Login</h1>
       <LoginForm onSubmit={handleSubmit}>
          <input type="text" name="username" placeholder="Username" onChange={handleChange}/><br/>

@@ -28,9 +28,9 @@ const HeaderContainer = ({ currentUser, logout }) => {
 
     const renderForm = () =>{
         if(showLogin){
-           return <LoginContainer/>
+           return <LoginContainer hideForm={handleLoginClick}/>
         }else if(showSignup){
-            return <SignupContainer/>
+            return <SignupContainer hideForm={handleSignupClick}/>
         }
     }
 
