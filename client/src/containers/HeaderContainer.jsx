@@ -56,6 +56,8 @@ const HeaderContainer = ({ currentUser, logout }) => {
     return(
         <HeaderWrapper>
             <HeaderItem><NavLink to="/">Home</NavLink></HeaderItem>
+            <HeaderItem><NavLink to="/#sketches">Sketches</NavLink></HeaderItem>
+
             {renderLoginLogoutSignup()}
             {renderForm()}
             {/* <NavLink className='App-link' style={{ marginRight: '10px' }} to="/sketches">Sketches</NavLink> */}

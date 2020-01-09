@@ -17,51 +17,52 @@ class HomeView extends React.Component {
         }
     }
     componentDidMount(){
+      if(this.props.location.hash === '#sketches'){
+        this.setState({currentView: 1})
+      }
         this.props.clearCurrentSketch()
         if(!this.props.sketches.length){
             this.props.fetchSketches()
         }
     }
 
-    componentDidUpdate(){
-        // if (this.props.currentSketch.id) {
-        //     this.props.history.push(`/sketches/${this.props.currentSketch.id}/edit`)
-        // }
+    componentDidUpdate(prevProps){
+      if(prevProps.location.hash !== '#sketches' && this.props.location.hash === '#sketches'){
+        this.setState({currentView: 1})
+      }else if(prevProps.location.hash !== '' && this.props.location.hash === ''){
+        this.setState({currentView: 0})
+      }
     }
 
-
     handleScroll = (e) => {
-        e.preventDefault()
-        if(e.deltaY > 0){
-          this.nextView()
-        }else{
-          this.previousView()
-        }
+      e.preventDefault()
+      if(e.deltaY > 0){
+        window.location.hash = '#sketches';
+        this.goToSketchPane()
+      }else{
+        window.location.hash = '';
+        this.goToWelcomSVG()
       }
-    
-      nextView = () => {
-        if (this.state.currentView < 1){
+    }
+
+      goToSketchPane = () => {
           this.setState({
-            currentView: this.state.currentView + 1
+            currentView: 1
           })
-        }
       }
-    
-      previousView = () => {
-        if (this.state.currentView > 0){
-            this.setState({
-                currentView: this.state.currentView - 1
-            })
-        }
-      }
+
+      goToWelcomSVG = () => {
+        this.setState({
+          currentView: 0
+        })
+    }
 
     render(){
         return(
-
             <HomeViewWrapper view={this.state.currentView} onWheel={this.handleScroll} onTouchMove={this.handleScroll}>
                 <NewSketchInput />
-                <WelcomeSVG transition={this.nextView} visible={!this.state.hasTransitioned}/>
-                <SketchPane visible={this.state.hasTransitioned}/>
+                <WelcomeSVG transition={this.goToSketchPane} />
+                <SketchPane />
             </HomeViewWrapper>
         )
     }

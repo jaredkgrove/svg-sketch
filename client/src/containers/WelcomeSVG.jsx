@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components'
 
 import ElementsContainer from './ElementsContainer'
-  const WelcomeSVG = ({transition, visible}) => {
+  const WelcomeSVG = ({transition}) => {
   const [visibleElements, setVisibleElements] = useState([])
-
+  const downLink = useRef()
 
     useEffect(() => {
         if(welcomSVGElements.length){
@@ -13,7 +13,7 @@ import ElementsContainer from './ElementsContainer'
                 setVisibleElements( () => {                     
                         elementIndex = elementIndex + 1
                         if(elementIndex === welcomSVGElements.length){
-                          setTimeout(transition, 1000)
+                          setTimeout(() => downLink.current.click(), 1000)
                           clearInterval(id)
                         }
                         return welcomSVGElements.slice(0, elementIndex)
@@ -25,11 +25,11 @@ import ElementsContainer from './ElementsContainer'
 
         }, [transition]);
     return(
-      <WelcomeSVGWrapper visible={visible}>
+      <WelcomeSVGWrapper>
         <svg viewBox = {`0 0 1000 180`} >
             <ElementsContainer elements={visibleElements}/>
         </svg>
-        <DownArrow onClick={transition}>
+        <DownArrow ref={downLink} href="#sketches" onClick={transition}>
           <div></div>
           <div></div>
         </DownArrow>
@@ -44,11 +44,10 @@ const WelcomeSVGWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   padding-top: 8vh;
-  transition: opacity 1s;
-  opacity:${props => props.visible ? '1': '0'};
 `;
 
-const DownArrow = styled.div`
+const DownArrow = styled.a`
+  display: block
   position: absolute;
   
   height:200px;
