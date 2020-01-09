@@ -21,7 +21,7 @@ const LoginContainer = ({ login }) => {
       <h1>Login</h1>
       <LoginForm onSubmit={handleSubmit}>
          <input type="text" name="username" placeholder="Username" onChange={handleChange}/><br/>
-         <input type="text" name="password" placeholdeR="Password" onChange={handleChange}/><br/>
+         <input type="password" name="password" placeholdeR="Password" onChange={handleChange}/><br/>
          <input type="submit" value="Login"/>
       </LoginForm>
    </LoginWrapper>

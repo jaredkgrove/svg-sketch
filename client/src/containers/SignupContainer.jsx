@@ -21,8 +21,8 @@ const SignupContainer = ({signup}) => {
       <h1>Sign Up</h1>
       <SignupForm onSubmit={handleSubmit}>
          <input type="text" name="username" placeholder="Username" onChange={handleChange}/><br/>
-         <input type="text" name="password" placeholdeR="Password" onChange={handleChange}/><br/>
-         <input type="text" name="passwordConfirmation" placeholdeR="Confirm Password" onChange={handleChange}/><br/>
+         <input type="password" name="password" placeholdeR="Password" onChange={handleChange}/><br/>
+         <input type="password" name="passwordConfirmation" placeholdeR="Confirm Password" onChange={handleChange}/><br/>
          <input type="submit" value="Sign Up"/>
       </SignupForm>
    </SignupWrapper>
